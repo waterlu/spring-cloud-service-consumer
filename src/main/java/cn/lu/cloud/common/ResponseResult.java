@@ -34,6 +34,10 @@ public class ResponseResult {
         this.msg = msg;
     }
 
+    public boolean isSuccessful() {
+        return this.code == OK;
+    }
+
     public <T> T getData(Class<T> clazz) {
         String jsonString = JSONObject.toJSONString(getData());
         return JSONObject.parseObject(jsonString, clazz);

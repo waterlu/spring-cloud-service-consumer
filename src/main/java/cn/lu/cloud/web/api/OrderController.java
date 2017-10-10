@@ -7,6 +7,7 @@ import cn.lu.cloud.dto.CreateOrderDTO;
 import cn.lu.cloud.entity.Order;
 import cn.lu.cloud.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -28,6 +29,12 @@ public class OrderController {
 
         ResponseResult responseResult = new ResponseResult();
         ResponseResult productResponse = productClient.getProduct(createOrderDTO.getProductUuid());
+        if (!productResponse.isSuccessful()) {
+            responseResult.setCode(productResponse.getCode());
+            responseResult.setMsg(productResponse.getMsg());
+            return responseResult;
+        }
+
         Product product = productResponse.getData(Product.class);
 
         if (null == product) {
