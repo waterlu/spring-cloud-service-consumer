@@ -4,10 +4,9 @@ import cn.lu.cloud.client.ProductClient;
 import cn.lu.cloud.common.ResponseResult;
 import cn.lu.cloud.data.OrderData;
 import cn.lu.cloud.dto.CreateOrderDTO;
+import cn.lu.cloud.dto.ProductDTO;
 import cn.lu.cloud.entity.Order;
-import cn.lu.cloud.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -35,7 +34,7 @@ public class OrderController {
             return responseResult;
         }
 
-        Product product = productResponse.getData(Product.class);
+        ProductDTO product = productResponse.getData(ProductDTO.class);
 
         if (null == product) {
             responseResult.setCode(errorCode);
